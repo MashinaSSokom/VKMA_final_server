@@ -7,14 +7,32 @@ class userController {
     }
 
     async getById(req, res) {
-        const {id} = req.params
-        const {name} = req.body
-        const user = await User.findOrCreate({
-            where: {id:id},
-            defaults: {id: id, name: name, signs: []},
-            include: [{model: Sign, as: 'signs'}]
-        })
-        return res.status(200).json(user)
+        try {
+            const {id} = req.params
+            console.log(id)
+            const user = await User.findOne({
+                where: {id:id},
+                include: [{model: Sign, as: 'signs'}]
+            })
+            return res.status(200).json(user)
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    async create(req, res) {
+        try {
+            const {id} = req.params
+            const name = req.body.name
+            console.log(name)
+            const user = await User.create({
+                id: id, name: name
+            })
+            return res.status(200).json(user)
+        } catch (e) {
+            console.log(e)
+        }
     }
 }
 

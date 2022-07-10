@@ -10,7 +10,7 @@ const Sign = sequelize.define('sign', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     text: {type: DataTypes.STRING},
     from: {type: DataTypes.INTEGER},
-    img: {type: DataTypes.STRING, unique: true, allowNull: false}
+    img: {type: DataTypes.STRING, unique: true, allowNull: true}
 })
 
 User.hasMany(Sign)
